@@ -1,27 +1,27 @@
-# Lmp
+# Exercice DEV Fullstack (Majeure Front) - usecase 50+1
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
+Ceci est le repèrtorie GIT pour le test de dev Full stack de Maxime Delobelle pour liegeymullerpons.
 
-## Development server
+Une demo est disponible à l'adresse suivante : 
+[DEMO](https://liegeymullerpons.herokuapp.com).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Stack Front
 
-## Code scaffolding
+Le front étant en Angular 7, j'ai fait le choix d'y intégrer Angular Material comme librairie graphique afin de garantir une certaine cohérence (stack 100% Google). J'y ai également ajouté Boostrap 4 pour le responsive design. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Stack Back 
 
-## Build
+Node.js avec  Express.js et TypeScript -> un seul language back et front. Rapide a mettre en place. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+# Base de données
 
-## Running unit tests
+Instance Base de données Postregres 10 créer sur Heroku. 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Accessible ici : ?
 
-## Running end-to-end tests
+# DevOps 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Afin de deployer l'application, j'ai choisi d'utiliser [Heroku](http://heroku.com/). car il permet de deployer gratuitement, et simplement, des applications node.js et Angular. 
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
