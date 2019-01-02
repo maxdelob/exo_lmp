@@ -1,5 +1,7 @@
 // run the following comand : node --max-old-space-size=3072 init-data.js
 const request = require("request"); // for http request
+const turf = require("turf");
+const turfContains = require("@turf/boolean-contains");
 const {
   Client
 } = require('pg');
@@ -16,7 +18,7 @@ for (i = 1; i < 21; i++) {
   const cp = '751' + gestionCP(i);
   let opendatasoftUrl  = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=sirene&q=depcomen="+ cp + "&rows=500";
   client.query('TRUNCATE TABLE entreprises;'); // clean db 
-  getData(opendatasoftUrl, cp);
+  getData(opendatasoftUrl, cp);  
 }
 
 function getData(opendatasoftUrl, cp) {
@@ -33,7 +35,7 @@ function getData(opendatasoftUrl, cp) {
           const latlng = record.fields.coordonnees;
           const ville = gestionApostrophe(record.fields.nom_dept);
           // insert in local db
-          if (isValidGeo(latlng) && isInCodePostal(cp, code_insee, ville)) {
+          if (isValidGeo(latlng)) {
             const queryInsert = `INSERT INTO entreprises (nom_entreprise, taille_entreprise, categorie, adresse, code_insee, ville, latlng, siren) VALUES ('${nom}', '${taille}', '${categorie}', '${adresse}', '${code_insee}', '${ville}',  ST_GeomFromText('POINT(${latlng[1]} ${latlng[0]})', 4326), '${siren}')`;
             client.query(queryInsert, (err, res) => {
               if (err) console.log(queryInsert)
@@ -58,18 +60,9 @@ function gestionCP(i) {
 function isValidGeo(latlng) {
   try {
     latlng[0] && latlng[1]
-    return true;
+    return true
   } catch {
     return false;
-  }
-}
-
-// function qui corrige l'erreur de données de l'API (certaines entreprises ne sont pas dans l'arrondissement)
-function isInCodePostal(expectedCP, cp, ville) {
-  if (ville == "PARIS" && cp == expectedCP) {
-    return true
-  } else {
-    return false
   }
 }
 

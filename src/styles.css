@@ -1,1 +1,13 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
+
+
+html, body {
+    /* background-color: #303030; */
+    width: 100%;
+    height: 100%;
+}
+
+.titre {
+    font-family: 'Ubuntu Condensed', sans-serif;
+}

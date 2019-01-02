@@ -1,0 +1,10 @@
+<mat-toolbar color="primary" class="d-flex flex-row-reverse">
+    <button matTooltip="Home"  class="ml-2 mr-2 bouton-retour" mat-button color="accent" (click)="retourHome()">Retour</button>
+    <button  mat-icon-button  matTooltip="Vue Carte" >
+        <mat-icon aria-label="map" style="color:white;"(click)="toggleNavigation('carte')">map</mat-icon>
+    </button>
+    <button mat-icon-button  matTooltip="Vue Tableau" (click)="toggleNavigation('tableau')">
+        <mat-icon aria-label="map"  style="color:white;">table_chart</mat-icon>
+    </button>
+    <span class="p-2 mr-5" *ngIf="!isHome" >{{arrondissementSelect?.insee}} - {{arrondissementSelect?.name}} - {{arrondissementSelect?.libelle}}</span>
+</mat-toolbar>

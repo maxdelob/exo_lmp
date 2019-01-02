@@ -25,3 +25,14 @@ Afin de deployer l'application, j'ai choisi d'utiliser [Heroku](http://heroku.co
 
 
 
+
+
+
+
+# Initalisation de la base de données
+Un script nodejs recupère les données de l'api avec un filtre de 500 pour aller les inserer dans une base de données préalablement créer en SQL. Le script est consulatable à la racine du porjet init-data.js
+
+On utilise Qgis pour importer le shapefile des arrondissements dans la base de données (conversion shapefile > St_Geom automatique). 
+
+Puisque certaines données importées dans l'api ne sont pas localisés dans le perimètre de l'arrondissement, on lance un script SQL pour supprimer les points en dehors des frontières de l'arrondisssement correspondant. 
+

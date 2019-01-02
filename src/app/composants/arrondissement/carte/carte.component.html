@@ -1,0 +1,13 @@
+
+<app-header></app-header>
+<mat-sidenav-container #sidenav style="height: calc(100% - 50px);">
+    <mat-sidenav-content>
+        <button mat-fab class="position-top-right"  matTooltip="LEGENDE" (click)='openLegend()'>
+            <mat-icon aria-label="Legend">list_alt</mat-icon>
+        </button>
+        <div style="height: 100%; width: 100%;" #map> </div>
+        <!-- <app-button-legend></app-button-legend> -->
+    </mat-sidenav-content>
+    <mat-sidenav position="end" mode="over" closed id="side-nav-carto">Sidenav content</mat-sidenav>
+  </mat-sidenav-container>
+
