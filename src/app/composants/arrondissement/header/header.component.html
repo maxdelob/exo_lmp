@@ -6,5 +6,5 @@
     <button mat-icon-button  matTooltip="Vue Tableau" (click)="toggleNavigation('tableau')">
         <mat-icon aria-label="map"  style="color:white;">table_chart</mat-icon>
     </button>
-    <span class="p-2 mr-5" *ngIf="!isHome" >{{arrondissementSelect?.insee}} - {{arrondissementSelect?.name}} - {{arrondissementSelect?.libelle}}</span>
+     <span class="p-2 mr-5">{{arrondissementSelect.insee}} - {{arrondissementSelect.name}} - {{arrondissementSelect.libelle}}</span>
 </mat-toolbar>

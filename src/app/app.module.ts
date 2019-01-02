@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableauComponent } from './composants/arrondissement/tableau/tableau.component';
 import { HeaderComponent } from './composants/arrondissement/header/header.component';
+import { ButtonLegendComponent } from './composants/arrondissement/carte/button-legend/button-legend.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HeaderComponent } from './composants/arrondissement/header/header.compo
       CarteComponent,
       HomeComponent,
       TableauComponent,
-      HeaderComponent
+      HeaderComponent,
+      ButtonLegendComponent
    ],
    imports: [
       BrowserModule,

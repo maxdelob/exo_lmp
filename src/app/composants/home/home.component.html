@@ -6,7 +6,7 @@
   <form style="width:60%;">
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Selectionnez un arrondissment" aria-label="arrondissments" [matAutocomplete]="auto" [formControl]="arrondCtrl">
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChanged($event)">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChanged()">
               <mat-option *ngFor="let arrond of arrondissmentsFiltres" [value]="arrond.insee" class="text-center">
               <span>{{arrond.insee}} - {{arrond.name}} - {{arrond.libelle}}</span>
             </mat-option>
