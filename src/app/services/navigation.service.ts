@@ -1,19 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { NomArrondissements } from '../classes/nomArrondissements';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavigationService {
-arrondissementSelect: NomArrondissements;
-
+@Output() closeLegendeCarto: EventEmitter<void> = new EventEmitter();
+@Output() filterCartoTaille: EventEmitter<string[]> = new EventEmitter();
 constructor() {}
-getArrondissementSelect(){
-  return this.arrondissementSelect;
-}
-
-setArrondissementSelect(val : NomArrondissements){
-  this.arrondissementSelect = val;
-}
-
 }

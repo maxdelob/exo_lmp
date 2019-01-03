@@ -37,6 +37,18 @@ app.get("/api/getEntrepriseByInsee/:insee", function(req, res) {
     api.getEntreprisesByInsee(req, res);
 })
 
+app.get("/fakeDataEntreprise", function(req, res) {
+    api.getFakeDataEntreprise(req, res);
+})
+
+app.get("/fakeDataGeo", function(req, res) {
+    api.getFakeDataGeo(req, res);
+})
+
+app.get("/fakeDataGeoOne/:row_id", function(req, res) {
+    api.getFakeGeoOne(req, res);
+})
+
 
 app.get('/*', function(req,res) {
     res.sendFile(path.join(__dirname+'/dist/lmp/index.html'));

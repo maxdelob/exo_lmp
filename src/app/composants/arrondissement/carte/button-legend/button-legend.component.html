@@ -1,3 +1,13 @@
-<p>
-  button-legend works!
-</p>
+<mat-toolbar color="warn">
+  <div class="col d-flex justify-content-between mt-2 mb-2">
+    <span style="font-size:1.5rem">Legende</span>
+    <button mat-icon-button>
+      <mat-icon aria-label="Example icon-button with a heart icon" (click)="closeLegende()">close</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+<mat-button-toggle-group  #group="matButtonToggleGroup" [value]="arrTailles" aria-label="Legende" multiple vertical (change)="toggleFiltre($event)">
+  <mat-button-toggle value="{{taille.nom}}" *ngFor="let taille of tailles">{{taille.nom}}<img class="m-1" style="height: 15px; width:15px"
+      src='{{taille.url}}'>
+  </mat-button-toggle>
+</mat-button-toggle-group>

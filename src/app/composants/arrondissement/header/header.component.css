@@ -1,4 +1,8 @@
-.bouton-retour {
-    position: absolute; 
-    left:0;
+
+.btn-inactif {
+    color : white;
+}
+
+.btn-actif {
+    color : #f44336;
 }

@@ -42,11 +42,10 @@ export class HomeComponent implements OnInit{
   
   }
   onSelectionChanged(){ 
-    this.arrondissments.forEach((arrond)=> {
-      if(this.arrondCtrl.value.toLowerCase() == arrond.insee){
-        this._navigationService.setArrondissementSelect(arrond);
-      }
-    })
     this._router.navigate(['/tableau/'+this.arrondCtrl.value + '/all']);
+  }
+
+  navigateFakeData(){
+    this._router.navigate(['/tableau/fake/all'])
   }
 }

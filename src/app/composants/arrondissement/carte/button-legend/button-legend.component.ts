@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpRequestsService } from 'src/app/services/httpRequests.service';
+import { TailleEntr } from './../../../../classes/tailleEntr';
+import { NavigationService } from 'src/app/services/navigation.service';
+import { MatButtonToggleGroup, MatButtonToggleChange } from '@angular/material';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-button-legend',
   templateUrl: './button-legend.component.html',
@@ -7,9 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ButtonLegendComponent implements OnInit {
 
-  constructor() { }
+  arrTailles : any = [];
+  tailles : TailleEntr[] = [];
+  constructor(
+    private _httpRequestsService : HttpRequestsService,
+    private _navigationService: NavigationService
+  ) {}
 
   ngOnInit() {
+    this._httpRequestsService.getListeTaille().subscribe((res : string []) => {
+      this.arrTailles = res;
+      res.forEach((element, index)=> {
+        const taille : TailleEntr = {nom : element, url :`assets/marker${index + 1}.svg`}
+        this.tailles.push(taille); 
+      });
+    })
+
+  }
+
+  toggleFiltre(e : any){
+    this._navigationService.filterCartoTaille.emit(e.value)
+  }
+
+  closeLegende(){
+    this._navigationService.closeLegendeCarto.emit()
   }
 
 }

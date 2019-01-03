@@ -2,7 +2,7 @@
     <img  class= "m-2 bouton-git" src="./assets/github-sign.svg" style='height:30px; width:30px; cursor: pointer;'>
     <span class="titre mr-2">Exercice LMP Maxime Delobelle</span>
 </mat-toolbar>
-<div class="col d-flex justify-content-center align-items-center" color='primary' style="height:60%;">
+<div class="col d-flex justify-content-center align-items-center" color='primary' style="height:calc(100% - 140px);">
   <form style="width:60%;">
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Selectionnez un arrondissment" aria-label="arrondissments" [matAutocomplete]="auto" [formControl]="arrondCtrl">
@@ -14,5 +14,7 @@
         </mat-form-field>
     </form>
 </div>
+<mat-divider></mat-divider>
+<button mat-button color="warn" (click)='navigateFakeData()'>Utiliser de la fausse donnée</button>
 
   

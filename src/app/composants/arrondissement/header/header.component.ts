@@ -1,8 +1,19 @@
-import { Component, OnInit} from '@angular/core';
-import { NavigationService } from 'src/app/services/navigation.service';
-import { NomArrondissements } from 'src/app/classes/nomArrondissements';
-import { HttpRequestsService } from 'src/app/services/httpRequests.service';
-import { Router } from '@angular/router';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  NavigationService
+} from 'src/app/services/navigation.service';
+import {
+  NomArrondissements
+} from 'src/app/classes/nomArrondissements';
+import {
+  HttpRequestsService
+} from 'src/app/services/httpRequests.service';
+import {
+  Router
+} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,41 +21,48 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  arrondissementSelect : NomArrondissements
+  arrondissementSelect: NomArrondissements;
+  isRouteTableau: boolean;
+  isRouteCarte: boolean;
   constructor(
     private _navigationService: NavigationService,
-    private _httpRequestsService : HttpRequestsService,
+    private _httpRequestsService: HttpRequestsService,
     private _router: Router
   ) {}
 
   ngOnInit() {
     this.initListeArrondissement();
+    if (this._router.url.split("/")[1] == "carte") {
+      this.isRouteTableau = false;
+      this.isRouteCarte = true
+    } else if (this._router.url.split("/")[1] == "tableau") {
+      this.isRouteTableau = true;
+      this.isRouteCarte = false;
+    }
   }
 
-  retourHome(){
+  retourHome() {
     this._router.navigate(["/"]);
   }
 
-  toggleNavigation(route : string) {
-    if(route == "carte" && this._router.url.split("/")[1] != "carte"){
-      this._router.navigate(["/carte/"+this.arrondissementSelect.insee + "/all"]);
+  toggleNavigation(route: string) {
+    if (route == "carte" && this._router.url.split("/")[1] != "carte") {
+      this._router.navigate(["/carte/" + this._router.url.split("/")[2] + "/all"]);
     }
-    if(route == "tableau" && this._router.url.split("/")[1] != "tableau"){
-      this._router.navigate(["/tableau/"+this.arrondissementSelect.insee]);
+    if (route == "tableau" && this._router.url.split("/")[1] != "tableau") {
+      this._router.navigate(["/tableau/" + this._router.url.split("/")[2] + "/all"]);
     }
   }
-
-      
+  
   initListeArrondissement() {
-    this.arrondissementSelect = this._navigationService.getArrondissementSelect();
-    if(!this.arrondissementSelect) { // si arrond nul => reload de la page sans passé par la home
-    this._httpRequestsService.getListeArrondissements().subscribe((res: NomArrondissements[]) => {
-      res.forEach(arrond => {
-        if(arrond.insee === this._router.url.split('/')[2]) {
-          this.arrondissementSelect = arrond;
-        }
-      });
-    })
+    if (!this.arrondissementSelect && this._router.url.split("/")[2] != "fake") { // si arrond nul => reload de la page sans passé par la home
+      this._httpRequestsService.getListeArrondissements().subscribe((res: NomArrondissements[]) => {
+        res.forEach(arrond => {
+          if (arrond.insee === this._router.url.split('/')[2]) {
+            this.arrondissementSelect = arrond;
+          }
+        });
+      })
     }
   }
 }

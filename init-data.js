@@ -1,7 +1,5 @@
 // run the following comand : node --max-old-space-size=3072 init-data.js
 const request = require("request"); // for http request
-const turf = require("turf");
-const turfContains = require("@turf/boolean-contains");
 const {
   Client
 } = require('pg');

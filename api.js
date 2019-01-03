@@ -2,6 +2,14 @@ const { Client } = require('pg');
 const connectionString = "postgres://pzjvgqtwhvboia:475f1ac1fcf49d09c2f6a4ce3bc01743d9752483cad9eadd4f1f41f68f2b5397@ec2-54-247-74-131.eu-west-1.compute.amazonaws.com:5432/d6qbk7df6arkq9";
 const client = new Client({connectionString: connectionString, ssl: true});
 client.connect();
+const fs = require('fs');
+var Chance = require('chance');
+const turf = require('turf');
+
+fakeEntrepise = [];
+fakeEntrepriseGeo = [];
+
+generateFakeEntreprises();
 
 module.exports = {
   getArrondissementsGeo: function (req, res) {
@@ -11,7 +19,7 @@ module.exports = {
   },
 
   getEntreprisesGeo: function(req, res){
-    const properties = `'id', row_id, 'nom', nom_entreprise, 'categorie', categorie, 'ville', ville, 'taille', taille_entreprise, 'adresse', adresse, 'code_insee', code_insee, 'siren', siren`;
+    const properties = `'row_id', row_id, 'nom', nom_entreprise, 'categorie', categorie, 'ville', ville, 'taille', taille_entreprise, 'adresse', adresse, 'code_insee', code_insee, 'siren', siren`;
     const queryGeoJSON = createSQLGeojson("entreprises", 'row_id', 'latlng', `code_insee = '${req.params.insee}'`, properties);
     query(queryGeoJSON, res);
   },
@@ -51,7 +59,23 @@ module.exports = {
       }
     })
   
-  }
+  },
+  getFakeDataEntreprise(req, res){
+    res.send(fakeEntrepise)
+   },
+   getFakeDataGeo(req, res){
+    res.send(fakeEntrepriseGeo)
+   },
+   getFakeGeoOne(req, res) {
+    let fakeOne;
+     fakeEntrepriseGeo.features.forEach((entreprise)=> {       
+       if(entreprise.properties.row_id == req.params.row_id) {
+          fakeOne = entreprise
+       }
+     })
+     res.send(turf.featureCollection([fakeOne]));
+   },
+
 };
 
 
@@ -79,3 +103,23 @@ function query(queryGeoJSON, res){
     }
  })
 }
+
+ function generateFakeEntreprises() {
+  const listeTaille = ["00 - 0 salarié","01 - 1 ou 2 salariés","02 - 3 à 5 salariés","03 - 6 à 9 salariés","11 - 10 à 19 salariés","12 - 20 à 49 salariés","21 - 50 à 99 salariés","22 - 100 à 199 salariés","31 - 200 à 249 salariés","32 - 250 à 499 salariés","41 - 500 à 999 salariés","NN - Unités non employeuses"];
+  var chance = new Chance();
+  const arrPoints = [];
+  for (let i = 0; i < 501; i++) {
+    const FeatureCollectionRandom = turf.random('point', 1, {bbox: [-82, 42, -80, 40]});
+    const entreprise = {
+     row_id : 1000 + i,
+     nom : chance.company(),
+     taille : listeTaille[chance.integer({min:0, max: listeTaille.length - 1})],
+     categorie : "Fake Data",
+     adresse : chance.address(),
+     coord: FeatureCollectionRandom.features[0].geometry.coordinates[0].toFixed(3)+ ' - ' + FeatureCollectionRandom.features[0].geometry.coordinates[1].toFixed(3)
+    }   
+    arrPoints.push(turf.point(FeatureCollectionRandom.features[0].geometry.coordinates, entreprise))
+    fakeEntrepise.push(entreprise);
+  }
+  fakeEntrepriseGeo = turf.featureCollection(arrPoints)
+} 

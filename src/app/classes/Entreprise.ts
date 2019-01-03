@@ -4,5 +4,5 @@ export interface Entreprise {
     "taille": string;
     "categorie": string;
     "adresse": string;
-    "coord": string, 
+    "coord": string
 }

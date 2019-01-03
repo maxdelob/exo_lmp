@@ -15,18 +15,39 @@ getArrondisement(insee : string){
   return this._http.get(environment.baseUrl + "/api/arrondissement/" + insee);
 }
 
-getEntreprises(insee : string){
-  return this._http.get(environment.baseUrl + "/api/entreprises/" + insee);
+getEntreprise(insee : string, row_id: string){
+  if(insee == "fake") {
+    return this._http.get(environment.baseUrl + "/fakeDataGeoOne/" + row_id);
+  }
+  else {
+    return this._http.get(environment.baseUrl + "/api/entreprise/" + insee + '/' + row_id);
+  }
 }
 
-getEntreprise(insee : string, row_id: string){
-  return this._http.get(environment.baseUrl + "/api/entreprise/" + insee + '/' + row_id);
+getEntreprises(insee : string){
+  if(insee == "fake") {
+    return this._http.get(environment.baseUrl + "/fakeDataGeo");
+  } else {
+    return this._http.get(environment.baseUrl + "/api/entreprises/" + insee);
+  }
 }
+
 getListeArrondissements(){
   return this._http.get(environment.baseUrl + "/api/listeArrondissements");
 }
 
-getEntreprisesTableau(insee : string){
-  return this._http.get(environment.baseUrl + "/api/getEntrepriseByInsee/" + insee);
+getListeTaille(){
+  return this._http.get(environment.baseUrl + "/api/listeTailleEntr");
 }
+
+getEntreprisesTableau(insee : string){
+  if(insee == "fake") {
+    return this._http.get(environment.baseUrl + "/fakeDataEntreprise");
+  } else {
+    return this._http.get(environment.baseUrl + "/api/getEntrepriseByInsee/" + insee);
+  }
+}
+
+
+
 }
