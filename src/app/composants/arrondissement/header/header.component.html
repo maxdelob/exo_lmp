@@ -3,9 +3,9 @@
     <span class="titre pr-2 pl-2 mr-5">{{arrondissementSelect?.insee}} - {{arrondissementSelect?.name}} -
         {{arrondissementSelect?.libelle}}</span>
     <button mat-icon-button matTooltip="Vue Carte">
-      <mat-icon aria-label="map" [ngClass]="{ 'btn-actif': !isRouteCarte, 'btn-actif': isRouteCarte }" (click)="toggleNavigation('carte')">map</mat-icon>
+      <mat-icon aria-label="map" [ngClass]="{ 'btn-actif': isRouteCarte }" (click)="toggleNavigation('carte')">map</mat-icon>
     </button>
     <button mat-icon-button matTooltip="Vue Tableau" (click)="toggleNavigation('tableau')">
-      <mat-icon aria-label="tableau"  [ngClass]="{ 'btn-actif': !isRouteTableau, 'btn-actif': isRouteTableau }" >table_chart</mat-icon>
+      <mat-icon aria-label="tableau"  [ngClass]="{  'btn-actif': isRouteTableau }" >table_chart</mat-icon>
     </button>
 </mat-toolbar>
