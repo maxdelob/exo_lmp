@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ButtonLegendComponent } from './button-legend.component';
 import { HttpRequestsService } from 'src/app/services/httpRequests.service';
+import { of } from 'rxjs/internal/observable/of';
+import { HttpClient } from '@angular/common/http';
 
 describe('ButtonLegendComponent', () => {
   let component: ButtonLegendComponent;
@@ -55,9 +57,9 @@ describe('ButtonLegendComponent', () => {
 
   });
 
-  it('should', ()=> {
-    // const spy = spyOn(httpRequestsService, 'getListeTaille');
-    // component.initListeFiltres();
+  fit('it should', ()=> {
+    const spy = spyOn(httpRequestsService, 'getListeTaille').and.returnValue(of(mokTaille))
+    // component.ngOnInit();
     // expect(spy).toHaveBeenCalled();   
   })
 });

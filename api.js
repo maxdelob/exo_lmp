@@ -51,7 +51,7 @@ module.exports = {
   },
 
   getEntreprisesByInsee(req, res){
-    const query = `SELECT row_id, nom_entreprise as nom, taille_entreprise as taille, categorie, adresse,  CONCAT(ST_X(latlng), ' - ', ST_Y(latlng)) as coord FROM entreprises WHERE code_insee = '${req.params.insee}' ORDER BY nom ASC`
+    const query = `SELECT CONCAT('ent_', row_id), nom_entreprise as nom, taille_entreprise as taille, categorie, adresse,  CONCAT(ST_X(latlng), ' - ', ST_Y(latlng)) as coord FROM entreprises WHERE code_insee = '${req.params.insee}' ORDER BY nom ASC`
     client.query(query, (errQuery, resQuery) => {
       if(errQuery){console.error(errQuery)}
       else {
