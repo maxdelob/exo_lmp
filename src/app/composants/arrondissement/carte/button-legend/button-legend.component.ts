@@ -10,6 +10,7 @@ import { HttpRequestsService } from 'src/app/services/httpRequests.service';
   styleUrls: ['./button-legend.component.css']
 })
 export class ButtonLegendComponent implements OnInit {
+  @ViewChild('button0') test :any
 
   arrTailles : any = [];
   tailles : TailleEntr[] = [];

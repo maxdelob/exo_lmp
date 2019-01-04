@@ -7,7 +7,7 @@
   </div>
 </mat-toolbar>
 <mat-button-toggle-group  #group="matButtonToggleGroup" [value]="arrTailles" aria-label="Legende" multiple vertical (change)="toggleFiltre($event)">
-  <mat-button-toggle value="{{taille.nom}}" *ngFor="let taille of tailles">{{taille.nom}}<img class="m-1" style="height: 15px; width:15px"
+  <mat-button-toggle value="{{taille.nom}}" *ngFor="let taille of tailles; let i = index">{{taille.nom}}<img class="m-1" style="height: 15px; width:15px"
       src='{{taille.url}}'>
   </mat-button-toggle>
 </mat-button-toggle-group>
