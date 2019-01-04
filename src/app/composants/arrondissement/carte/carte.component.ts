@@ -99,8 +99,14 @@ export class CarteComponent implements OnInit {
   }
 
   loadEntreprise(){
+    console.log('here')
      this._httpRequestsService.getEntreprise(this.insee, this.row_id).subscribe((res: FeatureCollection) => {        
       res.features.forEach((feature : any)=> {
+        console.log(feature.properties.id)
+        console.log(this.row_id)
+
+
+
         if(feature.properties.id = this.row_id){
           const marker = new L.Marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], {
             icon: this.computeIcon(feature)

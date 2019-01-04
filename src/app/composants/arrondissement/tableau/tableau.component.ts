@@ -30,6 +30,8 @@ export class TableauComponent implements OnInit {
     this.codeInsee = this._router.url.split('/')[2];
     this.row_id = this._router.url.split('/')[3];
     this._httpRequestService.getEntreprisesTableau(this.codeInsee).subscribe((res : Entreprise []) => {
+      
+      console.log(res)
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;

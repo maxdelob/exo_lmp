@@ -26,7 +26,7 @@ module.exports = {
 
   getOneEntreprisesGeo: function(req, res){
     const properties = `'id', row_id, 'nom', nom_entreprise, 'categorie', categorie, 'ville', ville, 'taille', taille_entreprise, 'adresse', adresse, 'code_insee', code_insee, 'siren', siren`;
-    const queryGeoJSON = createSQLGeojson("entreprises", 'row_id', 'latlng', `code_insee = '${req.params.insee}' AND row_id = '${req.params.row_id}'`, properties);
+    const queryGeoJSON = createSQLGeojson("entreprises", 'row_id', 'latlng', `code_insee = '${req.params.insee}' AND row_id = '${req.params.row_id.replace('e', '')}'`, properties);
     query(queryGeoJSON, res);
   },
   getListeTailleEntr: function(req, res){
@@ -51,7 +51,7 @@ module.exports = {
   },
 
   getEntreprisesByInsee(req, res){
-    const query = `SELECT CONCAT('ent_', row_id), nom_entreprise as nom, taille_entreprise as taille, categorie, adresse,  CONCAT(ST_X(latlng), ' - ', ST_Y(latlng)) as coord FROM entreprises WHERE code_insee = '${req.params.insee}' ORDER BY nom ASC`
+    const query = `SELECT CONCAT('e', row_id) as row_id, nom_entreprise as nom, taille_entreprise as taille, categorie, adresse,  CONCAT(ST_X(latlng), ' - ', ST_Y(latlng)) as coord FROM entreprises WHERE code_insee = '${req.params.insee}' ORDER BY nom ASC`
     client.query(query, (errQuery, resQuery) => {
       if(errQuery){console.error(errQuery)}
       else {
@@ -111,7 +111,7 @@ function query(queryGeoJSON, res){
   for (let i = 0; i < 501; i++) {
     const FeatureCollectionRandom = turf.random('point', 1, {bbox: [-82, 42, -80, 40]});
     const entreprise = {
-     row_id : 1000 + i,
+     row_id : 'e' + 10 + i,
      nom : chance.company(),
      taille : listeTaille[chance.integer({min:0, max: listeTaille.length - 1})],
      categorie : "Fake Data",
