@@ -3,7 +3,7 @@
   <mat-form-field style="width:20%;" class="mr-5 mt-1">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer tableau" [formControl]="filterInput"
       #filterTable>
-    <button mat-button *ngIf="filterInput" matSuffix mat-icon-button aria-label="Clear" (click)="emptyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="emptyFilter()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>

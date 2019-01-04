@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
-import { HttpRequestsService } from 'src/app/services/httpRequests.service';
 import { Router } from '@angular/router';
-import { Entreprise } from 'src/app/classes/Entreprise';
 import { FormControl } from '@angular/forms';
+
+import { Entreprise } from 'src/app/classes/Entreprise';
+import { HttpRequestsService } from 'src/app/services/httpRequests.service';
+
 
 @Component({
   selector: 'app-tableau',
@@ -14,9 +16,9 @@ export class TableauComponent implements OnInit {
   codeInsee: string;
   row_id: string;
   filterInput = new FormControl();
-  isFilterEmpty = true;
   displayedColumns: string[] = ["row_id", "nom","taille","categorie","adresse","coord", "map"];
   dataSource: MatTableDataSource<Entreprise>;
+
   @ViewChild("filterTable") filterTable: ElementRef;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;

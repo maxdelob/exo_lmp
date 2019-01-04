@@ -1,19 +1,7 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  NavigationService
-} from 'src/app/services/navigation.service';
-import {
-  NomArrondissements
-} from 'src/app/classes/nomArrondissements';
-import {
-  HttpRequestsService
-} from 'src/app/services/httpRequests.service';
-import {
-  Router
-} from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router} from '@angular/router';
+import { NomArrondissements} from 'src/app/classes/nomArrondissements';
+import {HttpRequestsService} from 'src/app/services/httpRequests.service';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +13,6 @@ export class HeaderComponent implements OnInit {
   isRouteTableau: boolean;
   isRouteCarte: boolean;
   constructor(
-    private _navigationService: NavigationService,
     private _httpRequestsService: HttpRequestsService,
     private _router: Router
   ) {}

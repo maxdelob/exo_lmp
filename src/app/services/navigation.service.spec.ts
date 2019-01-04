@@ -9,8 +9,4 @@ describe('Service: Navigation', () => {
       providers: [NavigationService]
     });
   });
-
-  it('should ...', inject([NavigationService], (service: NavigationService) => {
-    expect(service).toBeTruthy();
-  }));
 });

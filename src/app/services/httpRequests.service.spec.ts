@@ -9,8 +9,4 @@ describe('Service: HttpRequests', () => {
       providers: [HttpRequestsService]
     });
   });
-
-  it('should ...', inject([HttpRequestsService], (service: HttpRequestsService) => {
-    expect(service).toBeTruthy();
-  }));
 });

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpRequestsService } from 'src/app/services/httpRequests.service';
 import { TailleEntr } from './../../../../classes/tailleEntr';
 import { NavigationService } from 'src/app/services/navigation.service';
-import { MatButtonToggleGroup, MatButtonToggleChange } from '@angular/material';
-import { FormControl } from '@angular/forms';
+import { HttpRequestsService } from 'src/app/services/httpRequests.service';
+
+
 @Component({
   selector: 'app-button-legend',
   templateUrl: './button-legend.component.html',
@@ -19,6 +19,10 @@ export class ButtonLegendComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.initListeFiltres();
+  }
+
+  initListeFiltres(){
     this._httpRequestsService.getListeTaille().subscribe((res : string []) => {
       this.arrTailles = res;
       res.forEach((element, index)=> {
@@ -26,7 +30,6 @@ export class ButtonLegendComponent implements OnInit {
         this.tailles.push(taille); 
       });
     })
-
   }
 
   toggleFiltre(e : any){

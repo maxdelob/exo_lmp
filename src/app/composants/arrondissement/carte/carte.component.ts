@@ -1,26 +1,11 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef
-} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
-import {
-  FeatureCollection,
-  Feature
-} from 'geojson';
-import {
-  ActivatedRoute
-} from '@angular/router';
-import {
-  HttpRequestsService
-} from '../../../services/httpRequests.service';
-import {
-  MatSidenav, MatSnackBar
-} from '@angular/material';
+import { FeatureCollection, Feature} from 'geojson';
+import { ActivatedRoute } from '@angular/router';
+import { HttpRequestsService } from '../../../services/httpRequests.service';
+import { MatSidenav, MatSnackBar } from '@angular/material';
 import { NavigationService } from 'src/app/services/navigation.service';
-
 
 @Component({
   selector: 'app-carte',
@@ -51,16 +36,7 @@ export class CarteComponent implements OnInit {
   })
 
   this._navigationService.filterCartoTaille.subscribe((valeurFiltre : string[]) => {
-    this.markerClusters.removeLayers(this.entreprisesMarkers);
-    this.entreprisesMarkers = this.allEntrepisesMarker;
-    const tempArr : L.Marker[] = [];
-    this.entreprisesMarkers.forEach((marker)=> {
-      if(valeurFiltre.includes(marker.feature.properties.taille)){
-        tempArr.push(marker);
-        this.markerClusters.addLayer(marker);
-      }
-    })
-    this.entreprisesMarkers = tempArr;
+   this.filterLegende(valeurFiltre);
   })
   }
 
@@ -201,6 +177,19 @@ export class CarteComponent implements OnInit {
 
   zoomToArrondissement(){
     this.map.fitBounds(this.arrondissement.getBounds());
+  }
+
+  filterLegende(valeurFiltre : string[]){
+    this.markerClusters.removeLayers(this.entreprisesMarkers);
+    this.entreprisesMarkers = this.allEntrepisesMarker;
+    const tempArr : L.Marker[] = [];
+    this.entreprisesMarkers.forEach((marker)=> {
+      if(valeurFiltre.includes(marker.feature.properties.taille)){
+        tempArr.push(marker);
+        this.markerClusters.addLayer(marker);
+      }
+    })
+    this.entreprisesMarkers = tempArr;
   }
 
 }
